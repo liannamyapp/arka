@@ -1,0 +1,25 @@
+{
+  "name": "arka-configurator",
+  "version": "1.0.0",
+  "description": "3D chair configurator built with Three.js: PBR materials, lighting presets, animated camera views and SVG/DXF technical drawing export.",
+  "type": "module",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "npx serve .",
+    "check": "node --check src/main.js"
+  },
+  "keywords": [
+    "threejs",
+    "three.js",
+    "webgl",
+    "3d",
+    "javascript",
+    "product-configurator",
+    "svg",
+    "dxf"
+  ],
+  "dependencies": {
+    "three": "0.160.0"
+  },
+  "license": "MIT"
+}

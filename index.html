@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Конфигуратор «Арка»</title>
+  <meta name="description" content="3D-конфигуратор кресла на Three.js с экспортом чертежа в SVG и DXF">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div class="app">
+    <section class="stage" id="stage" data-light="studio" aria-label="3D-вид кресла">
+      <div class="tint"></div>
+      <div class="brand">
+        <h1>Кресло «Арка»</h1>
+        <span id="sku">ARK-04A · BK-112 · OAK</span>
+      </div>
+      <div class="hint">Вращение — мышью, масштаб — колесом</div>
+      <div class="views" id="views" role="group" aria-label="Ракурс">
+        <button type="button" data-view="front" aria-pressed="false">Спереди</button>
+        <button type="button" data-view="three" aria-pressed="true">3/4</button>
+        <button type="button" data-view="side" aria-pressed="false">Сбоку</button>
+      </div>
+    </section>
+
+    <aside class="panel">
+      <div class="group">
+        <div class="label"><h2>Обивка</h2><output id="fabricName">Букле «Овёс»</output></div>
+        <div class="swatches" id="fabrics" role="group" aria-label="Обивка"></div>
+      </div>
+
+      <div class="group">
+        <div class="label"><h2>Ножки и каркас</h2><output id="legName">Дуб</output></div>
+        <div class="swatches" id="legs" role="group" aria-label="Ножки и каркас"></div>
+      </div>
+
+      <div class="group">
+        <div class="label"><h2>Свет</h2></div>
+        <div class="seg" id="lights" role="group" aria-label="Освещение">
+          <button type="button" data-light="studio" aria-pressed="true">Студия</button>
+          <button type="button" data-light="warm" aria-pressed="false">Вечер</button>
+          <button type="button" data-light="day" aria-pressed="false">День</button>
+        </div>
+      </div>
+
+      <div class="group">
+        <label class="toggle" for="arms">Подлокотники <input class="switch" type="checkbox" id="arms" checked></label>
+        <label class="toggle" for="spin">Автоповорот <input class="switch" type="checkbox" id="spin" checked></label>
+      </div>
+
+      <div class="group">
+        <div class="label"><h2>Чертёж</h2><output>SVG · DXF</output></div>
+        <div class="actions">
+          <button type="button" class="btn primary" id="showDrawing">Показать чертёж</button>
+          <button type="button" class="btn" data-export="svg">SVG</button>
+          <button type="button" class="btn" data-export="dxf">DXF</button>
+        </div>
+      </div>
+
+      <dl class="spec">
+        <dt>Ширина</dt><dd id="dW">74 см</dd>
+        <dt>Глубина</dt><dd id="dD">68 см</dd>
+        <dt>Высота</dt><dd id="dH">84 см</dd>
+        <dt>Высота сиденья</dt><dd id="dS">45 см</dd>
+        <dt>Артикул</dt><dd id="dSku">ARK-04A</dd>
+      </dl>
+
+      <p class="note">Three.js, ES-модули без сборки. Модель собрана из примитивов, текстуры генерируются в canvas, отражения строятся через PMREM. Чертёж с размерами формируется из тех же параметров, что и 3D-модель.</p>
+    </aside>
+  </div>
+
+  <dialog id="drawingDialog" aria-labelledby="drawingTitle">
+    <div class="dlg-head">
+      <h2 id="drawingTitle">Чертёж ARK-04A</h2>
+      <button type="button" class="btn" id="closeDrawing">Закрыть</button>
+    </div>
+    <div class="preview" id="drawingPreview"></div>
+    <div class="dlg-foot">
+      <p class="note">Вид спереди и сверху, размеры в мм. DXF открывается в AutoCAD, LibreCAD и CAM-программах.</p>
+      <div class="actions">
+        <button type="button" class="btn" data-export="svg">Скачать SVG</button>
+        <button type="button" class="btn primary" data-export="dxf">Скачать DXF</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
